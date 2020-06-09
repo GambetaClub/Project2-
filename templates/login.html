@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<script>
+
+	document.addEventListener('DOMContentLoaded', () => {
+
+		// By default, submit button is disabled
+		document.querySelector('#submit').disabled = true;
+
+		// Enable button only if there is text in the input field
+		document.querySelector('#username').onkeyup = () => {
+			if (document.querySelector('#username').value.length > 0)
+				document.querySelector('#submit').disabled = false;
+			else
+				document.querySelector('#submit').disabled = true;
+		};
+
+		document.querySelector('#new-username').onsubmit = () => {
+			// Clear input field and disable button again
+			document.querySelector('#username').value = '';
+			document.querySelector('#submit').disabled = true;
+
+			// Stop form from submitting
+			return false;
+		};
+	});
+
+</script>
+<form action="/login" method="post" name="new-username">
+	<label for="username"></label>
+	<input type="text" id="username" name="username" placeholder="Example: Pedrito777"/>
+	<div class="control">
+	<input id="submit" type="submit" value="submit"/>
+</form>
+{% endblock %}
